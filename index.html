@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Máy tính Web</title>
+    <script>
+        async function calculate() {
+            let a = document.getElementById("a").value;
+            let b = document.getElementById("b").value;
+            let op = document.getElementById("op").value;
+
+            let response = await fetch("api.aspx?a=" + a + "&b=" + b + "&op=" + op);
+            let result = await response.json();
+
+            if (result.error) {
+                document.getElementById("result").innerText = "Lỗi: " + result.error;
+            } else {
+                document.getElementById("result").innerText = "Kết quả: " + result.value;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Máy tính Web</h2>
+    <input type="text" id="a" placeholder="Số 1" />
+    <input type="text" id="b" placeholder="Số 2" />
+    <select id="op">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <button onclick="calculate()">Tính</button>
+    <p id="lblResult"></p>
+</body>
+</html>
